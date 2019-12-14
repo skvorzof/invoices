@@ -1,0 +1,7 @@
+appId: "com.d76"
+# Package app code into a asar archive. Set to false to debug issues.
+asar: true
+# Mac OS configuration
+mac:
+  icon: "public/icons/invoice.icns"
+  category: "public.app-category.utilities"
