@@ -4,6 +4,8 @@ import Dexie from 'dexie';
 import "dexie-export-import";
 import FileSaver from 'file-saver';
 import notifier from 'codex-notifier';
+import format from 'date-format';
+import {push} from 'svelte-spa-router';
 
 
 let file;
@@ -22,6 +24,7 @@ async function importDatabase(){
         style: 'success',
         time: 5000 
     });
+    document.location.reload(true);
   } catch (error) {
     notifier.show({
         message: `importDatabase ${error}`,
@@ -35,7 +38,7 @@ async function importDatabase(){
 async function exportDatabase() {
   try {
     const blob = await db.export({prettyJson: true});
-    FileSaver.saveAs(blob, "dexie-export.json", "application/json");
+    FileSaver.saveAs(blob, `db-export_${format('ddMMyy_hhmmss', new Date())}.json`, "application/json");
   } catch (error) {
     notifier.danger(`Export from file db.js ${error}`);
   }
